@@ -443,6 +443,49 @@ $parser.hashSchema = function () {
 }
 };
 
+function _qxNativePresetConfig() {
+  return {
+    values: {
+      regout: "^(?!.*(?:防失联|防失聯|备用|備用|\\bUDP\\b|\\bTCP\\b)).*(?:Data\\s*Left|Remain(?:ing)?|Traffic|Bandwidth|流量|剩[余餘]|套餐|用量|容量|残り使用容量|残りデータ通信量|📝\\s*Gói|Expir[ey]|Expire\\s*Date|到期|过期|過期|有效期|有効期限|[时時][间間]|Reset|重置|リセット|最新[网網][站址]|官[方网網]|获取|地址|群|更新|官网|官網|通知|公告|\\d[\\d.]*\\s*[MGTP]B[^\\dA-Za-z]+\\d[\\d.]*\\s*[MGTP]B|分割线|分割線|---+|===+|🔰\\s*(?:ID|HSD|SNI)\\s*:).*$",
+      delreg: "[^\\u4e00-\\u9fa5a-zA-Z0-9\\s\\-\\.\\_\\(\\)\\[\\]\\|\\uD83C\\uDDE6-\\uDDFF\\uD83D\\uDC00-\\uDEFF\\u2600-\\u27BF]",
+      replace: "\\s{2,}@%20",
+      emoji: "1",
+      rename: "%5Bnode_tag_prefix%5D%20@",
+      sort: "🇭🇰>🇯🇵>🇸🇬>🇨🇳>🇺🇸"
+    },
+    uiKeys: {
+      qxf: true,
+      clean: true,
+      cleantag: true,
+      autoe: true,
+      airport: true,
+      rsort: true
+    }
+  };
+}
+
+function _removeNativePresetFragment(raw, fragment, sep) {
+  if (raw === undefined || raw === null || fragment === undefined || fragment === null) {
+    return { found: false, value: raw };
+  }
+
+  raw = String(raw);
+  fragment = String(fragment);
+
+  if (raw === fragment) return { found: true, value: "" };
+  if (raw.indexOf(sep + fragment + sep) !== -1) {
+    return { found: true, value: raw.replace(sep + fragment + sep, sep) };
+  }
+  if (raw.indexOf(fragment + sep) === 0) {
+    return { found: true, value: raw.slice(fragment.length + sep.length) };
+  }
+  if (raw.lastIndexOf(sep + fragment) === raw.length - sep.length - fragment.length) {
+    return { found: true, value: raw.slice(0, raw.length - sep.length - fragment.length) };
+  }
+
+  return { found: false, value: raw };
+}
+
 // hashToUI：支持动态参数
 $parser.hashToUI = function (hash) {
   if (!hash) return { version: 1, sections: [] };
@@ -466,13 +509,64 @@ $parser.hashToUI = function (hash) {
     if (allItems[k]) {
       values[k] = v;
     } else {
-      dynamicItems.push({
-        type: "text",
-        key: k,
-        label: k,
-        value: v
-      });
+      values[k] = v;
     }
+  });
+
+  var preset = _qxNativePresetConfig().values;
+  var presetState = {};
+
+  function takePreset(k, uiKey, sep) {
+    if (!(k in values)) return false;
+    var removed = _removeNativePresetFragment(values[k], preset[k], sep);
+    if (!removed.found) return false;
+
+    presetState[uiKey] = true;
+    if (removed.value) {
+      values[k] = removed.value;
+    } else {
+      delete values[k];
+    }
+    return true;
+  }
+
+  var foundClean = takePreset("regout", "clean", "|");
+  var foundDelReg = takePreset("delreg", "cleantag", "|");
+  var foundReplace = takePreset("replace", "cleantag", "+");
+  var foundCleanTag = foundDelReg && foundReplace;
+  if (!foundCleanTag) delete presetState.cleantag;
+
+  if (values.emoji === preset.emoji) {
+    presetState.autoe = true;
+    delete values.emoji;
+  }
+  var foundAirport = takePreset("rename", "airport", "+");
+  if (values.sort === preset.sort) {
+    presetState.rsort = true;
+    delete values.sort;
+  }
+
+  if (foundClean && foundCleanTag && presetState.autoe && foundAirport && presetState.rsort) {
+    values.qxf = "1";
+    delete presetState.clean;
+    delete presetState.cleantag;
+    delete presetState.autoe;
+    delete presetState.airport;
+    delete presetState.rsort;
+  }
+
+  Object.keys(presetState).forEach(function (k) {
+    values[k] = "1";
+  });
+
+  Object.keys(values).forEach(function (k) {
+    if (allItems[k]) return;
+    dynamicItems.push({
+      type: "text",
+      key: k,
+      label: k,
+      value: values[k]
+    });
   });
 
   var sections = [];
@@ -528,22 +622,9 @@ $parser.uiToHash = function (values) {
     g.items.forEach(function (it) { allItems[it.key] = it; });
   });
 
-  var qxPreset = {
-    regout: "^(?!.*(?:防失联|防失聯|备用|備用|\\bUDP\\b|\\bTCP\\b)).*(?:Data\\s*Left|Remain(?:ing)?|Traffic|Bandwidth|流量|剩[余餘]|套餐|用量|容量|残り使用容量|残りデータ通信量|📝\\s*Gói|Expir[ey]|Expire\\s*Date|到期|过期|過期|有效期|有効期限|[时時][间間]|Reset|重置|リセット|最新[网網][站址]|官[方网網]|获取|地址|群|更新|官网|官網|通知|公告|\\d[\\d.]*\\s*[MGTP]B[^\\dA-Za-z]+\\d[\\d.]*\\s*[MGTP]B|分割线|分割線|---+|===+|🔰\\s*(?:ID|HSD|SNI)\\s*:).*$",
-    delreg: "[^\\u4e00-\\u9fa5a-zA-Z0-9\\s\\-\\.\\_\\(\\)\\[\\]\\|\\uD83C\\uDDE6-\\uDDFF\\uD83D\\uDC00-\\uDEFF\\u2600-\\u27BF]",
-    replace: "\\s{2,}@%20",
-    emoji: "1",
-    rename: "%5Bnode_tag_prefix%5D%20@",
-    sort: "🇭🇰>🇯🇵>🇸🇬>🇨🇳>🇺🇸"
-  };
-  var qxPresetKeys = {
-    qxf: true,
-    clean: true,
-    cleantag: true,
-    autoe: true,
-    airport: true,
-    rsort: true
-  };
+  var nativePreset = _qxNativePresetConfig();
+  var qxPreset = nativePreset.values;
+  var qxPresetKeys = nativePreset.uiKeys;
   var merged = {};
 
   function isOn(k) {
