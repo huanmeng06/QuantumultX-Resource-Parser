@@ -1,0 +1,9 @@
+﻿# Shadowrocket remote rule set
+# Policy: 📺 巴哈姆特
+# Generated from Shadowrocket v.25.5.201.conf on 2026-05-22
+
+DOMAIN,bahamut.akamaized.net
+DOMAIN,gamer-cds.cdn.hinet.net
+DOMAIN,gamer2-cds.cdn.hinet.net
+DOMAIN-SUFFIX,bahamut.com.tw
+DOMAIN-SUFFIX,gamer.com.tw

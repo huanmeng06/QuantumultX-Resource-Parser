@@ -1,0 +1,43 @@
+﻿# Shadowrocket remote rule set
+# Policy: 🐙 GITHUB
+# Generated from Shadowrocket v.25.5.201.conf on 2026-05-22
+
+DOMAIN,github.com
+DOMAIN,www.github.com
+DOMAIN,api.github.com
+DOMAIN,uploads.github.com
+DOMAIN,codeload.github.com
+DOMAIN,raw.githubusercontent.com
+DOMAIN,gist.githubusercontent.com
+DOMAIN,objects.githubusercontent.com
+DOMAIN,media.githubusercontent.com
+DOMAIN,user-images.githubusercontent.com
+DOMAIN,avatars.githubusercontent.com
+DOMAIN,camo.githubusercontent.com
+DOMAIN,private-user-images.githubusercontent.com
+DOMAIN,release-assets.githubusercontent.com
+DOMAIN,github-releases.githubusercontent.com
+DOMAIN,github-registry-files.githubusercontent.com
+DOMAIN,pkg-containers.githubusercontent.com
+DOMAIN,npm.pkg.github.com
+DOMAIN,maven.pkg.github.com
+DOMAIN,nuget.pkg.github.com
+DOMAIN,rubygems.pkg.github.com
+DOMAIN,ghcr.io
+DOMAIN,release.github.com
+DOMAIN,releases.github.com
+DOMAIN,github.global.ssl.fastly.net
+DOMAIN,github.map.fastly.net
+DOMAIN-SUFFIX,github.com
+DOMAIN-SUFFIX,github.io
+DOMAIN-SUFFIX,githubapp.com
+DOMAIN-SUFFIX,githubassets.com
+DOMAIN-SUFFIX,githubusercontent.com
+DOMAIN-SUFFIX,github.blog
+DOMAIN-SUFFIX,ghcr.io
+DOMAIN-SUFFIX,github-cloud.s3.amazonaws.com
+DOMAIN-SUFFIX,github-com.s3.amazonaws.com
+DOMAIN-KEYWORD,github-production-release-asset
+DOMAIN-KEYWORD,github-production-user-asset
+DOMAIN-KEYWORD,github-production-repository-file
+DOMAIN-KEYWORD,github
