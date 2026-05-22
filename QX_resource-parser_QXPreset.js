@@ -496,12 +496,13 @@ $parser.hashToUI = function (hash) {
   var preset = {
     regout: "^(?!.*(?:防失[联聯]|[备備]用|\\b(?:UDP|TCP)\\b)).*(?:流量|剩[余餘]|套餐|用量|容量|到期|[过過]期|有效期|[时時][间間]|重置|官网|官網|更新|通知|公告|群|地址|获取|分割[线線]|Data|Remain|Traffic|Bandwidth|Expir|Reset).*$",
     delreg: "[^\\u4e00-\\u9fa5a-zA-Z0-9\\s\\-\\.\\_\\(\\)\\[\\]\\|\\uD83C\\uDDE6-\\uDDFF\\uD83D\\uDC00-\\uDEFF\\u2600-\\u27BF]",
-    replace: "\\s{2,}@%20",
+    replace: "%5Cs%7B2%2C%7D@%20",
     emoji: "1",
     rename: "%5Bnode_tag_prefix%5D%20@",
     sort: "🇭🇰>🇯🇵>🇸🇬>🇨🇳>🇺🇸"
   };
   var legacyRegout = "^(?!.*(?:防失联|防失聯|备用|備用|\\bUDP\\b|\\bTCP\\b)).*(?:Data\\s*Left|Remain(?:ing)?|Traffic|Bandwidth|流量|剩[余餘]|套餐|用量|容量|残り使用容量|残りデータ通信量|📝\\s*Gói|Expir[ey]|Expire\\s*Date|到期|过期|過期|有效期|有効期限|[时時][间間]|Reset|重置|リセット|最新[网網][站址]|官[方网網]|获取|地址|群|更新|官网|官網|通知|公告|\\d[\\d.]*\\s*[MGTP]B[^\\dA-Za-z]+\\d[\\d.]*\\s*[MGTP]B|分割线|分割線|---+|===+|🔰\\s*(?:ID|HSD|SNI)\\s*:).*$";
+  var legacyReplace = "\\s{2,}@%20";
   var presetState = {};
 
   function takePreset(k, uiKey, sep) {
@@ -509,6 +510,9 @@ $parser.hashToUI = function (hash) {
     var removed = removeNativePresetFragment(values[k], preset[k], sep);
     if (!removed.found && k === "regout") {
       removed = removeNativePresetFragment(values[k], legacyRegout, sep);
+    }
+    if (!removed.found && k === "replace") {
+      removed = removeNativePresetFragment(values[k], legacyReplace, sep);
     }
     if (!removed.found) return false;
 
@@ -616,7 +620,7 @@ $parser.uiToHash = function (values) {
   var qxPreset = {
     regout: "^(?!.*(?:防失[联聯]|[备備]用|\\b(?:UDP|TCP)\\b)).*(?:流量|剩[余餘]|套餐|用量|容量|到期|[过過]期|有效期|[时時][间間]|重置|官网|官網|更新|通知|公告|群|地址|获取|分割[线線]|Data|Remain|Traffic|Bandwidth|Expir|Reset).*$",
     delreg: "[^\\u4e00-\\u9fa5a-zA-Z0-9\\s\\-\\.\\_\\(\\)\\[\\]\\|\\uD83C\\uDDE6-\\uDDFF\\uD83D\\uDC00-\\uDEFF\\u2600-\\u27BF]",
-    replace: "\\s{2,}@%20",
+    replace: "%5Cs%7B2%2C%7D@%20",
     emoji: "1",
     rename: "%5Bnode_tag_prefix%5D%20@",
     sort: "🇭🇰>🇯🇵>🇸🇬>🇨🇳>🇺🇸"
