@@ -1,16 +1,38 @@
-﻿# Shadowrocket Rules
+﻿# Shadowrocket
 
-自用 Shadowrocket 远程分流规则。
+Shadowrocket 自用配置与远程分流规则。
 
-## 使用方式
+## 文件
 
-1. 把本目录提交到 GitHub 公开仓库。
-2. 将 `Shadowrocket Config v2.conf` 里的 `huanmeng06/Proxy-Config-Sets` 替换成自己的 GitHub 用户名和仓库名。
-3. 在 Shadowrocket 中使用精简后的配置，远程规则会从 `Shadowrocket/rules/*.list` 拉取。
+- `Shadowrocket Config v2.conf`：公开版 Shadowrocket 主配置。
+- `rules/*.list`：从本地批量规则拆出的远程分流规则。
 
-## 注意
+## 规则引用
 
-- 不要公开托管节点、订阅、token、证书、MITM ca-p12、ca-passphrase。
-- 少量手动规则建议继续留在主配置本地，方便临时调整。
-- `GEOIP` 和 `FINAL` 保留在主配置，避免规则顺序被破坏。
+主配置通过 `RULE-SET` 引用本目录下的规则文件，例如：
 
+```ini
+RULE-SET,https://raw.githubusercontent.com/huanmeng06/Proxy-Config-Sets/main/Shadowrocket/rules/github.list,🐙 GITHUB
+```
+
+规则文件只保留规则本体，不带最终策略组；策略由 `RULE-SET` 行最后一列指定。
+
+## 本地保留
+
+以下内容保留在主配置中：
+
+- 少量手动规则
+- 防漏检测规则
+- iOS 更新屏蔽
+- `GEOIP,CN`
+- `FINAL`
+
+## 安全
+
+公开配置中不应包含：
+
+- 节点或订阅
+- token
+- MITM ca-p12
+- MITM ca-passphrase
+- 私有 hostname
