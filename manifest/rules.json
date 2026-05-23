@@ -1,0 +1,277 @@
+{
+  "baseUrl": "https://raw.githubusercontent.com/huanmeng06/Proxy-Config-Sets/refs/heads/main/Rules",
+  "localRulesDir": "Rules",
+  "quantumultX": {
+    "updateInterval": 172800,
+    "optParser": true,
+    "enabled": true
+  },
+  "clash": {
+    "providerPathPrefix": "./rulesets/Proxy-Config-Sets"
+  },
+  "sections": [
+    {
+      "name": "Ads / Cleanup",
+      "rules": [
+        {
+          "id": "ads",
+          "file": "ads.list",
+          "policy": {
+            "quantumultX": "🛑 广告拦截",
+            "shadowrocket": "🛑 广告拦截"
+          },
+          "clashProviders": [
+            "BanAD"
+          ]
+        },
+        {
+          "id": "app-clean",
+          "file": "app-clean.list",
+          "policy": {
+            "quantumultX": "🍃 应用净化",
+            "shadowrocket": "🍃 应用净化"
+          },
+          "clashProviders": [
+            "BanProgramAD"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Dev / AI",
+      "rules": [
+        {
+          "id": "ai",
+          "file": "ai.list",
+          "policy": {
+            "quantumultX": "💬 Ai平台",
+            "shadowrocket": "💬 AI平台"
+          },
+          "clashProviders": [
+            "AI",
+            "OpenAi"
+          ]
+        },
+        {
+          "id": "github",
+          "tag": "GitHub",
+          "file": "github.list",
+          "policy": {
+            "quantumultX": "🐙 GITHUB",
+            "shadowrocket": "🐙 GITHUB"
+          },
+          "clashProviders": [
+            "GitHub"
+          ]
+        },
+        {
+          "id": "google-fcm",
+          "file": "google-fcm.list",
+          "policy": {
+            "quantumultX": "📢 谷歌FCM",
+            "shadowrocket": "📢 谷歌FCM"
+          },
+          "clashProviders": [
+            "GoogleFCM"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Apple / Microsoft",
+      "rules": [
+        {
+          "id": "apple",
+          "file": "apple.list",
+          "policy": {
+            "quantumultX": "🍎 苹果服务",
+            "shadowrocket": "🍎 苹果服务"
+          },
+          "clashProviders": [
+            "Apple"
+          ]
+        },
+        {
+          "id": "microsoft-bing",
+          "file": "microsoft-bing.list",
+          "policy": {
+            "quantumultX": "Ⓜ️ 微软Bing",
+            "shadowrocket": "Ⓜ️ 微软BING"
+          },
+          "clashProviders": [
+            "Bing"
+          ]
+        },
+        {
+          "id": "microsoft",
+          "file": "microsoft.list",
+          "policy": {
+            "quantumultX": "Ⓜ️ 微软服务",
+            "shadowrocket": "Ⓜ️ 微软服务"
+          },
+          "clashProviders": [
+            "Microsoft"
+          ]
+        },
+        {
+          "id": "microsoft-drive",
+          "file": "microsoft-drive.list",
+          "policy": {
+            "quantumultX": "Ⓜ️ 微软云盘",
+            "shadowrocket": "Ⓜ️ 微软云盘"
+          },
+          "clashProviders": [
+            "OneDrive"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Media",
+      "rules": [
+        {
+          "id": "global-media",
+          "file": "global-media.list",
+          "policy": {
+            "quantumultX": "🌍 国外媒体",
+            "shadowrocket": "🌍 国外媒体"
+          },
+          "clashProviders": [
+            "ProxyMedia"
+          ]
+        },
+        {
+          "id": "domestic-media",
+          "file": "domestic-media.list",
+          "policy": {
+            "quantumultX": "🌏 国内媒体",
+            "shadowrocket": "🌏 国内媒体"
+          },
+          "clashProviders": [
+            "ChinaMedia"
+          ]
+        },
+        {
+          "id": "bilibili",
+          "file": "bilibili.list",
+          "policy": {
+            "quantumultX": "📺 哔哩哔哩",
+            "shadowrocket": "📺 哔哩哔哩"
+          },
+          "clashProviders": [
+            "BilibiliHMT",
+            "Bilibili"
+          ]
+        },
+        {
+          "id": "bahamut",
+          "file": "bahamut.list",
+          "policy": {
+            "quantumultX": "📺 巴哈姆特",
+            "shadowrocket": "📺 巴哈姆特"
+          },
+          "clashProviders": [
+            "Bahamut"
+          ]
+        },
+        {
+          "id": "netease-music",
+          "file": "netease-music.list",
+          "policy": {
+            "quantumultX": "🎶 网易音乐",
+            "shadowrocket": "🎶 网易音乐"
+          },
+          "clashProviders": [
+            "NetEaseMusic"
+          ]
+        },
+        {
+          "id": "netflix",
+          "file": "netflix.list",
+          "policy": {
+            "quantumultX": "🎥 奈飞视频",
+            "shadowrocket": "🎥 奈飞视频"
+          },
+          "clashProviders": [
+            "Netflix"
+          ]
+        },
+        {
+          "id": "youtube",
+          "file": "youtube.list",
+          "policy": {
+            "quantumultX": "📹 油管视频",
+            "shadowrocket": "📹 油管视频"
+          },
+          "clashProviders": [
+            "YouTube"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Messaging / Games",
+      "rules": [
+        {
+          "id": "telegram",
+          "file": "telegram.list",
+          "policy": {
+            "quantumultX": "📲 电报消息",
+            "shadowrocket": "📲 电报消息"
+          },
+          "clashProviders": [
+            "Telegram"
+          ]
+        },
+        {
+          "id": "games",
+          "file": "games.list",
+          "policy": {
+            "quantumultX": "🎮 游戏平台",
+            "shadowrocket": "🎮 游戏平台"
+          },
+          "clashProviders": [
+            "Epic",
+            "Origin",
+            "Sony",
+            "Steam",
+            "Nintendo"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Broad Match",
+      "rules": [
+        {
+          "id": "direct",
+          "file": "direct.list",
+          "policy": {
+            "quantumultX": "🎯 全球直连",
+            "shadowrocket": "🎯 全球直连"
+          },
+          "clashProviders": [
+            "LocalAreaNetwork",
+            "UnBan",
+            "GoogleCN",
+            "SteamCN",
+            "ChinaDomain",
+            "ChinaCompanyIp",
+            "Download"
+          ]
+        },
+        {
+          "id": "proxy",
+          "file": "proxy.list",
+          "policy": {
+            "quantumultX": "🚀 节点选择",
+            "shadowrocket": "🚀 节点选择"
+          },
+          "clashProviders": [
+            "ProxyGFWlist"
+          ]
+        }
+      ]
+    }
+  ]
+}

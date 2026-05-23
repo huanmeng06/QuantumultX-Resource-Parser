@@ -8,6 +8,8 @@
 - `Quantumult X/`：Quantumult X 配置和资源解析器。
 - `Shadowrocket/`：Shadowrocket 配置。
 - `Clash Verge Rev/`：Clash Verge Rev 全局扩展脚本。
+- `manifest/rules.json`：三端远程规则引用的统一清单。
+- `scripts/generate-rule-refs.js`：根据清单生成三端远程规则引用区。
 
 ## 维护原则
 
@@ -23,4 +25,14 @@
 ```text
 https://raw.githubusercontent.com/huanmeng06/Proxy-Config-Sets/refs/heads/main/Rules/github.list
 ```
+
+## 生成规则引用
+
+三端配置中的远程规则引用区由 `manifest/rules.json` 维护。修改规则清单后运行：
+
+```bash
+node scripts/generate-rule-refs.js
+```
+
+脚本只会替换配置文件里的 generated block，策略组、手动规则和兜底规则仍然手写维护。
 
