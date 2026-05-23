@@ -1,6 +1,5 @@
-# Clash Verge Rev remote rule set
-# Policy: 🐙 GITHUB
-# Source-compatible with Shadowrocket/rules/github.list
+﻿# Shared remote rule set
+# Source: huanmeng06/Proxy-Config-Sets/Rules
 
 DOMAIN,github.com
 DOMAIN,www.github.com

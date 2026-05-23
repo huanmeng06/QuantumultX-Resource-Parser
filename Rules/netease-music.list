@@ -1,6 +1,5 @@
-﻿# Shadowrocket remote rule set
-# Policy: 🎶 网易音乐
-# Generated from Shadowrocket v.25.5.201.conf on 2026-05-22
+﻿# Shared remote rule set
+# Source: huanmeng06/Proxy-Config-Sets/Rules
 
 DOMAIN-SUFFIX,163yun.com
 DOMAIN-SUFFIX,api.iplay.163.com

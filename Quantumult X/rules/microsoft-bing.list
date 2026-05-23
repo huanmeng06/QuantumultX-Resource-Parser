@@ -1,7 +1,0 @@
-﻿# Quantumult X remote filter
-# Policy: Ⓜ️ 微软Bing
-# Source: quantumult_20260523005929.conf
-
-DOMAIN-SUFFIX,bing.com
-DOMAIN-SUFFIX,copilot.cloud.microsoft
-DOMAIN-SUFFIX,copilot.microsoft.com

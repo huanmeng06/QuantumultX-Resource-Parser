@@ -1,6 +1,5 @@
-﻿# Quantumult X remote filter
-# Policy: Ⓜ️ 微软云盘
-# Source: quantumult_20260523005929.conf
+﻿# Shared remote rule set
+# Source: huanmeng06/Proxy-Config-Sets/Rules
 
 DOMAIN-KEYWORD,1drv
 DOMAIN-KEYWORD,onedrive

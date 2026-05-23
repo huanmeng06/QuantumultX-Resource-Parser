@@ -1,6 +1,5 @@
-﻿# Shadowrocket remote rule set
-# Policy: 🎯 全球直连
-# Generated from Shadowrocket v.25.5.201.conf on 2026-05-22
+﻿# Shared remote rule set
+# Source: huanmeng06/Proxy-Config-Sets/Rules
 
 DOMAIN-SUFFIX,acl4.ssr
 DOMAIN-SUFFIX,ip6-localhost
@@ -18,10 +17,6 @@ IP-CIDR,172.16.0.0/12,no-resolve
 IP-CIDR,192.168.0.0/16,no-resolve
 IP-CIDR,198.18.0.0/16,no-resolve
 IP-CIDR,224.0.0.0/4,no-resolve
-IP-CIDR,::1/128,no-resolve
-IP-CIDR,FC00::/7,no-resolve
-IP-CIDR,FE80::/10,no-resolve
-IP-CIDR,FD00::/8,no-resolve
 DOMAIN,instant.arubanetworks.com
 DOMAIN,setmeup.arubanetworks.com
 DOMAIN,router.asus.com
@@ -475,10 +470,6 @@ IP-CIDR,139.220.243.27/32,no-resolve
 IP-CIDR,172.16.102.56/32,no-resolve
 IP-CIDR,185.188.32.1/28,no-resolve
 IP-CIDR,221.226.128.146/32,no-resolve
-IP-CIDR,2A0B:B580::/48,no-resolve
-IP-CIDR,2A0B:B581::/48,no-resolve
-IP-CIDR,2A0B:B582::/48,no-resolve
-IP-CIDR,2A0B:B583::/48,no-resolve
 DOMAIN-SUFFIX,baomitu.com
 DOMAIN-SUFFIX,bootcss.com
 DOMAIN-SUFFIX,jiasule.com

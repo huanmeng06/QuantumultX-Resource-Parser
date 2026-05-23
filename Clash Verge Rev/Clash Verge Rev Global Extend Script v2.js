@@ -1,4 +1,4 @@
-function main(config) {
+﻿function main(config) {
   if (!config.proxies || config.proxies.length === 0) return config;
 
   const TEST_URL = "http://www.gstatic.com/generate_204";
@@ -431,7 +431,7 @@ function main(config) {
     "Microsoft": "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Microsoft.list",
     "Apple": "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Apple.list",
     "Telegram": "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Telegram.list",
-    "GitHub": `https://raw.githubusercontent.com/huanmeng06/Proxy-Config-Sets/main/Clash%20Verge%20Rev/rules/github.list`,
+    "GitHub": `https://raw.githubusercontent.com/huanmeng06/Proxy-Config-Sets/main/Rules/github.list`,
     "AI": "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/AI.list",
     "OpenAi": "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/OpenAi.list",
     "NetEaseMusic": "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/NetEaseMusic.list",
@@ -624,3 +624,4 @@ function main(config) {
 
   return config;
 }
+

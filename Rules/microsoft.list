@@ -1,6 +1,5 @@
-﻿# Shadowrocket remote rule set
-# Policy: Ⓜ️ 微软服务
-# Generated from Shadowrocket v.25.5.201.conf on 2026-05-22
+﻿# Shared remote rule set
+# Source: huanmeng06/Proxy-Config-Sets/Rules
 
 DOMAIN-KEYWORD,1drv
 DOMAIN-KEYWORD,microsoft

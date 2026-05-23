@@ -1,6 +1,5 @@
-﻿# Shadowrocket remote rule set
-# Policy: 📲 电报消息
-# Generated from Shadowrocket v.25.5.201.conf on 2026-05-22
+﻿# Shared remote rule set
+# Source: huanmeng06/Proxy-Config-Sets/Rules
 
 DOMAIN-SUFFIX,t.me
 DOMAIN-SUFFIX,tdesktop.com
@@ -12,6 +11,3 @@ IP-CIDR,91.108.0.0/16,no-resolve
 IP-CIDR,95.161.64.0/20,no-resolve
 IP-CIDR,109.239.140.0/24,no-resolve
 IP-CIDR,149.154.160.0/20,no-resolve
-IP-CIDR,2001:67C:4E8::/48,no-resolve
-IP-CIDR,2001:B28:F23D::/48,no-resolve
-IP-CIDR,2001:B28:F23F::/48,no-resolve
