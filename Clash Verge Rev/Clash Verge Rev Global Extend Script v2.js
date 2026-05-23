@@ -1,6 +1,38 @@
 function main(config) {
   if (!config.proxies || config.proxies.length === 0) return config;
 
+  const TEST_URL = "http://www.gstatic.com/generate_204";
+  const INTERVAL = 300;
+  const TOLERANCE = 50;
+  const GROUP = {
+    node: "🚀 节点选择",
+    manual: "🚀 手动切换",
+    auto: "♻️ 自动选择",
+    direct: "🎯 全球直连",
+    download: "⏬ 下载专用",
+    telegram: "📲 电报消息",
+    github: "🐙 GITHUB",
+    ai: "💬 Ai平台",
+    youtube: "📹 油管视频",
+    netflix: "🎥 奈飞视频",
+    netflixNode: "🎥 奈飞节点",
+    bahamut: "📺 巴哈姆特",
+    bilibili: "📺 哔哩哔哩",
+    globalMedia: "🌍 国外媒体",
+    domesticMedia: "🌏 国内媒体",
+    googleFcm: "📢 谷歌FCM",
+    microsoftStore: "Ⓜ️ 微软商店",
+    microsoftBing: "Ⓜ️ 微软Bing",
+    microsoftDrive: "Ⓜ️ 微软云盘",
+    microsoft: "Ⓜ️ 微软服务",
+    apple: "🍎 苹果服务",
+    games: "🎮 游戏平台",
+    netease: "🎶 网易音乐",
+    ads: "🛑 广告拦截",
+    appClean: "🍃 应用净化",
+    fallback: "🐟 漏网之鱼"
+  };
+
   // =========================================================
   // 1. 节点过滤：清理无效的测速/到期/网站广告节点
   // =========================================================
@@ -195,9 +227,9 @@ function main(config) {
       regionGroups.push({
         name: def.name,
         type: "url-test",
-        url: "http://www.gstatic.com/generate_204",
-        interval: 300,
-        tolerance: 50,
+        url: TEST_URL,
+        interval: INTERVAL,
+        tolerance: TOLERANCE,
         proxies: normalProxies
       });
     }
@@ -208,9 +240,9 @@ function main(config) {
       regionGroups.push({
         name: def.homeName,
         type: "url-test",
-        url: "http://www.gstatic.com/generate_204",
-        interval: 300,
-        tolerance: 50,
+        url: TEST_URL,
+        interval: INTERVAL,
+        tolerance: TOLERANCE,
         proxies: homeProxies
       });
     }
@@ -231,10 +263,23 @@ function main(config) {
   const netflixProxies = getProxiesByRegex("(NF|奈飞|解锁|Netflix|NETFLIX|Media)");
   if (netflixProxies.length > 0) {
     regionGroups.push({
-      name: "🎥 奈飞节点",
+      name: GROUP.netflixNode,
       type: "select",
       proxies: netflixProxies
     });
+  }
+
+  const downloadProxies = getProxiesByRegex("(⏬|下载|download|dl|大流量|低倍率|0\\.[0-9]+x|0\\.[0-9]+倍)");
+  if (downloadProxies.length > 0) {
+    regionGroups.push({
+      name: GROUP.download,
+      type: "url-test",
+      url: TEST_URL,
+      interval: 600,
+      tolerance: 100,
+      proxies: downloadProxies
+    });
+    availableRegionGroupNames.push(GROUP.download);
   }
 
   // =========================================================
@@ -242,51 +287,58 @@ function main(config) {
   // =========================================================
   const allProxies = proxies.length > 0 ? proxies : ["DIRECT"];
   const proxyGroups = [];
+  const pushSelectGroup = (name, choices) => {
+    proxyGroups.push({ name, type: "select", proxies: choices });
+  };
+  const pushUrlTestGroup = (name, choices) => {
+    proxyGroups.push({
+      name,
+      type: "url-test",
+      url: TEST_URL,
+      interval: INTERVAL,
+      tolerance: TOLERANCE,
+      proxies: choices
+    });
+  };
 
-  proxyGroups.push({
-    name: "🚀 节点选择",
-    type: "select",
-    proxies: ["♻️ 自动选择", ...availableRegionGroupNames, "🚀 手动切换", "DIRECT"]
-  });
+  pushSelectGroup(GROUP.node, [GROUP.auto, ...availableRegionGroupNames, GROUP.manual, "DIRECT"]);
 
-  proxyGroups.push({
-    name: "🚀 手动切换",
-    type: "select",
-    proxies: allProxies
-  });
+  pushSelectGroup(GROUP.manual, allProxies);
 
-  proxyGroups.push({
-    name: "♻️ 自动选择",
-    type: "url-test",
-    url: "http://www.gstatic.com/generate_204",
-    interval: 300,
-    tolerance: 50,
-    proxies: allProxies
-  });
+  pushUrlTestGroup(GROUP.auto, allProxies);
 
-  proxyGroups.push({
-    name: "🎯 全球直连",
-    type: "select",
-    proxies: ["DIRECT", "🚀 节点选择", "♻️ 自动选择"]
-  });
+  pushSelectGroup(GROUP.direct, ["DIRECT", GROUP.node, GROUP.auto]);
 
-  const commonChoices = ["🚀 节点选择", "♻️ 自动选择", ...availableRegionGroupNames, "🚀 手动切换", "DIRECT"];
+  const commonChoices = [GROUP.node, GROUP.auto, ...availableRegionGroupNames, GROUP.manual, "DIRECT"];
 
   const getSafeChoices = (preferred) => {
     const safe = preferred.filter(
       p =>
         p === "DIRECT" ||
-        p === "🚀 节点选择" ||
-        p === "♻️ 自动选择" ||
-        p === "🚀 手动切换" ||
-        p === "🎯 全球直连" ||
+        p === GROUP.node ||
+        p === GROUP.auto ||
+        p === GROUP.manual ||
+        p === GROUP.direct ||
         availableRegionGroupNames.includes(p)
     );
     return safe.length > 0 ? safe : ["DIRECT"];
   };
 
   // 核心功能组
-  proxyGroups.push({ name: "📲 电报消息", type: "select", proxies: commonChoices });
+  pushSelectGroup(GROUP.telegram, commonChoices);
+
+  const githubChoices = getSafeChoices([
+    GROUP.node,
+    GROUP.manual,
+    "🇭🇰 香港节点",
+    "🇸🇬 狮城节点",
+    "🇯🇵 日本节点",
+    "🇺🇸 美国节点",
+    "🇨🇳 台湾节点",
+    GROUP.download,
+    GROUP.direct
+  ]);
+  pushSelectGroup(GROUP.github, githubChoices);
 
   const aiChoices = getSafeChoices([
     "🇺🇸 美国节点",
@@ -297,34 +349,25 @@ function main(config) {
     "🏠🇸🇬 狮城家宽",
     "🇨🇳 台湾节点",
     "🏠🇨🇳 台湾家宽",
-    "🚀 手动切换"
+    GROUP.manual
   ]);
-  proxyGroups.push({ name: "💬 Ai平台", type: "select", proxies: aiChoices });
+  pushSelectGroup(GROUP.ai, aiChoices);
 
-  proxyGroups.push({ name: "📹 油管视频", type: "select", proxies: commonChoices });
+  pushSelectGroup(GROUP.youtube, commonChoices);
 
-  const netflixChoices = netflixProxies.length > 0 ? ["🎥 奈飞节点", ...commonChoices] : commonChoices;
-  proxyGroups.push({ name: "🎥 奈飞视频", type: "select", proxies: netflixChoices });
+  const netflixChoices = netflixProxies.length > 0 ? [GROUP.netflixNode, ...commonChoices] : commonChoices;
+  pushSelectGroup(GROUP.netflix, netflixChoices);
 
-  proxyGroups.push({
-    name: "📺 巴哈姆特",
-    type: "select",
-    proxies: getSafeChoices(["🇨🇳 台湾节点", "🚀 节点选择", "🚀 手动切换", "DIRECT"])
-  });
+  pushSelectGroup(GROUP.bahamut, getSafeChoices(["🇨🇳 台湾节点", GROUP.node, GROUP.manual, "DIRECT"]));
 
-  proxyGroups.push({
-    name: "📺 哔哩哔哩",
-    type: "select",
-    proxies: getSafeChoices(["🎯 全球直连", "🇨🇳 台湾节点", "🇭🇰 香港节点"])
-  });
+  pushSelectGroup(GROUP.bilibili, getSafeChoices([GROUP.direct, "🇨🇳 台湾节点", "🇭🇰 香港节点"]));
 
-  proxyGroups.push({ name: "🌍 国外媒体", type: "select", proxies: commonChoices });
+  pushSelectGroup(GROUP.globalMedia, commonChoices);
 
-  proxyGroups.push({
-    name: "🌏 国内媒体",
-    type: "select",
-    proxies: getSafeChoices(["DIRECT", "🇭🇰 香港节点", "🇨🇳 台湾节点", "🇸🇬 狮城节点", "🇯🇵 日本节点", "🚀 手动切换"])
-  });
+  pushSelectGroup(
+    GROUP.domesticMedia,
+    getSafeChoices(["DIRECT", "🇭🇰 香港节点", "🇨🇳 台湾节点", "🇸🇬 狮城节点", "🇯🇵 日本节点", GROUP.manual])
+  );
 
   const defaultServiceChoices = getSafeChoices([
     "DIRECT",
@@ -335,10 +378,10 @@ function main(config) {
     "🇸🇬 狮城节点",
     "🇯🇵 日本节点",
     "🇰🇷 韩国节点",
-    "🚀 手动切换"
+    GROUP.manual
   ]);
 
-  proxyGroups.push({ name: "📢 谷歌FCM", type: "select", proxies: defaultServiceChoices });
+  pushSelectGroup(GROUP.googleFcm, defaultServiceChoices);
 
   const microsoftStoreChoices = getSafeChoices([
     "🚀 节点选择",
@@ -348,30 +391,24 @@ function main(config) {
     "🇸🇬 狮城节点",
     "🇨🇳 台湾节点",
     "🇺🇸 美国节点",
-    "🚀 手动切换",
+    GROUP.manual,
     "DIRECT"
   ]);
-  proxyGroups.push({ name: "Ⓜ️ 微软商店", type: "select", proxies: microsoftStoreChoices });
+  pushSelectGroup(GROUP.microsoftStore, microsoftStoreChoices);
 
-  proxyGroups.push({ name: "Ⓜ️ 微软Bing", type: "select", proxies: defaultServiceChoices });
-  proxyGroups.push({ name: "Ⓜ️ 微软云盘", type: "select", proxies: defaultServiceChoices });
-  proxyGroups.push({ name: "Ⓜ️ 微软服务", type: "select", proxies: defaultServiceChoices });
-  proxyGroups.push({ name: "🍎 苹果服务", type: "select", proxies: defaultServiceChoices });
-  proxyGroups.push({ name: "🎮 游戏平台", type: "select", proxies: defaultServiceChoices });
+  [GROUP.microsoftBing, GROUP.microsoftDrive, GROUP.microsoft, GROUP.apple, GROUP.games].forEach(name => {
+    pushSelectGroup(name, defaultServiceChoices);
+  });
 
   let neteaseProxies = getProxiesByRegex("(网易|音乐|解锁|Music|NetEase)");
-  let neteaseChoices = ["DIRECT", "🚀 节点选择", "♻️ 自动选择"];
+  let neteaseChoices = ["DIRECT", GROUP.node, GROUP.auto];
   if (neteaseProxies.length > 0) neteaseChoices.push(...neteaseProxies);
-  proxyGroups.push({ name: "🎶 网易音乐", type: "select", proxies: neteaseChoices });
+  pushSelectGroup(GROUP.netease, neteaseChoices);
 
   // 底部拦截组
-  proxyGroups.push({ name: "🛑 广告拦截", type: "select", proxies: ["REJECT", "DIRECT"] });
-  proxyGroups.push({ name: "🍃 应用净化", type: "select", proxies: ["REJECT", "DIRECT"] });
-  proxyGroups.push({
-    name: "🐟 漏网之鱼",
-    type: "select",
-    proxies: ["🚀 节点选择", "♻️ 自动选择", "DIRECT", ...availableRegionGroupNames, "🚀 手动切换"]
-  });
+  pushSelectGroup(GROUP.ads, ["REJECT", "DIRECT"]);
+  pushSelectGroup(GROUP.appClean, ["REJECT", "DIRECT"]);
+  pushSelectGroup(GROUP.fallback, [GROUP.node, GROUP.auto, "DIRECT", ...availableRegionGroupNames, GROUP.manual]);
 
   // 放入动态生成的地区组
   proxyGroups.push(...regionGroups);
@@ -394,6 +431,7 @@ function main(config) {
     "Microsoft": "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Microsoft.list",
     "Apple": "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Apple.list",
     "Telegram": "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Telegram.list",
+    "GitHub": `https://raw.githubusercontent.com/huanmeng06/Proxy-Config-Sets/main/Clash%20Verge%20Rev/rules/github.list`,
     "AI": "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/AI.list",
     "OpenAi": "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/OpenAi.list",
     "NetEaseMusic": "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/NetEaseMusic.list",
@@ -421,7 +459,7 @@ function main(config) {
       type: "http",
       behavior: "classical",
       format: "text",
-      path: `./rulesets/ACL4SSR/${name}.list`,
+      path: name === "GitHub" ? "./rulesets/Proxy-Config-Sets/GitHub.list" : `./rulesets/ACL4SSR/${name}.list`,
       url: url,
       interval: 86400
     };
@@ -431,63 +469,64 @@ function main(config) {
   // 7. Rules (规则映射)
   // =========================================================
   config["rules"] = [
-    "DOMAIN-SUFFIX,ipleak.net,🚀 节点选择",
-    "DOMAIN-SUFFIX,dnsleaktest.com,🚀 节点选择",
-    "DOMAIN-SUFFIX,deepl.com,🎯 全球直连",
-    "DOMAIN-SUFFIX,ping0.cc,🎯 全球直连",
-    "DOMAIN-SUFFIX,tjcn.org,🎯 全球直连",
-    "RULE-SET,LocalAreaNetwork,🎯 全球直连",
-    "RULE-SET,UnBan,🎯 全球直连",
-    "RULE-SET,BanAD,🛑 广告拦截",
-    "RULE-SET,BanProgramAD,🍃 应用净化",
-    "RULE-SET,GoogleFCM,📢 谷歌FCM",
-    "RULE-SET,GoogleCN,🎯 全球直连",
-    "RULE-SET,SteamCN,🎯 全球直连",
+    `DOMAIN-SUFFIX,ipleak.net,${GROUP.node}`,
+    `DOMAIN-SUFFIX,dnsleaktest.com,${GROUP.node}`,
+    `DOMAIN-SUFFIX,deepl.com,${GROUP.direct}`,
+    `DOMAIN-SUFFIX,ping0.cc,${GROUP.direct}`,
+    `DOMAIN-SUFFIX,tjcn.org,${GROUP.direct}`,
+    `RULE-SET,LocalAreaNetwork,${GROUP.direct}`,
+    `RULE-SET,UnBan,${GROUP.direct}`,
+    `RULE-SET,BanAD,${GROUP.ads}`,
+    `RULE-SET,BanProgramAD,${GROUP.appClean}`,
+    `RULE-SET,GoogleFCM,${GROUP.googleFcm}`,
+    `RULE-SET,GoogleCN,${GROUP.direct}`,
+    `RULE-SET,SteamCN,${GROUP.direct}`,
 
     // Microsoft Store / App Installer / Windows Update 下载源
     // 放在 Bing / OneDrive / Microsoft 规则集之前，避免被通用微软规则提前匹配。
-    "DOMAIN-SUFFIX,mp.microsoft.com,Ⓜ️ 微软商店",
-    "DOMAIN-SUFFIX,store.microsoft.com,Ⓜ️ 微软商店",
-    "DOMAIN-SUFFIX,storeedgefd.dsx.mp.microsoft.com,Ⓜ️ 微软商店",
-    "DOMAIN-SUFFIX,displaycatalog.mp.microsoft.com,Ⓜ️ 微软商店",
-    "DOMAIN-SUFFIX,purchase.md.mp.microsoft.com,Ⓜ️ 微软商店",
-    "DOMAIN-SUFFIX,licensing.mp.microsoft.com,Ⓜ️ 微软商店",
-    "DOMAIN-SUFFIX,store-images.microsoft.com,Ⓜ️ 微软商店",
-    "DOMAIN-SUFFIX,storecatalogrevocation.storequality.microsoft.com,Ⓜ️ 微软商店",
-    "DOMAIN-SUFFIX,dl.delivery.mp.microsoft.com,Ⓜ️ 微软商店",
-    "DOMAIN-SUFFIX,delivery.mp.microsoft.com,Ⓜ️ 微软商店",
-    "DOMAIN-SUFFIX,prod.do.dsp.mp.microsoft.com,Ⓜ️ 微软商店",
-    "DOMAIN-SUFFIX,windowsupdate.com,Ⓜ️ 微软商店",
-    "DOMAIN-SUFFIX,login.live.com,Ⓜ️ 微软商店",
-    "DOMAIN-SUFFIX,account.live.com,Ⓜ️ 微软商店",
-    "DOMAIN-SUFFIX,auth.gfx.ms,Ⓜ️ 微软商店",
+    `DOMAIN-SUFFIX,mp.microsoft.com,${GROUP.microsoftStore}`,
+    `DOMAIN-SUFFIX,store.microsoft.com,${GROUP.microsoftStore}`,
+    `DOMAIN-SUFFIX,storeedgefd.dsx.mp.microsoft.com,${GROUP.microsoftStore}`,
+    `DOMAIN-SUFFIX,displaycatalog.mp.microsoft.com,${GROUP.microsoftStore}`,
+    `DOMAIN-SUFFIX,purchase.md.mp.microsoft.com,${GROUP.microsoftStore}`,
+    `DOMAIN-SUFFIX,licensing.mp.microsoft.com,${GROUP.microsoftStore}`,
+    `DOMAIN-SUFFIX,store-images.microsoft.com,${GROUP.microsoftStore}`,
+    `DOMAIN-SUFFIX,storecatalogrevocation.storequality.microsoft.com,${GROUP.microsoftStore}`,
+    `DOMAIN-SUFFIX,dl.delivery.mp.microsoft.com,${GROUP.microsoftStore}`,
+    `DOMAIN-SUFFIX,delivery.mp.microsoft.com,${GROUP.microsoftStore}`,
+    `DOMAIN-SUFFIX,prod.do.dsp.mp.microsoft.com,${GROUP.microsoftStore}`,
+    `DOMAIN-SUFFIX,windowsupdate.com,${GROUP.microsoftStore}`,
+    `DOMAIN-SUFFIX,login.live.com,${GROUP.microsoftStore}`,
+    `DOMAIN-SUFFIX,account.live.com,${GROUP.microsoftStore}`,
+    `DOMAIN-SUFFIX,auth.gfx.ms,${GROUP.microsoftStore}`,
 
-    "RULE-SET,Bing,Ⓜ️ 微软Bing",
-    "RULE-SET,OneDrive,Ⓜ️ 微软云盘",
-    "RULE-SET,Microsoft,Ⓜ️ 微软服务",
-    "RULE-SET,Apple,🍎 苹果服务",
-    "RULE-SET,Telegram,📲 电报消息",
-    "RULE-SET,AI,💬 Ai平台",
-    "RULE-SET,OpenAi,💬 Ai平台",
-    "RULE-SET,NetEaseMusic,🎶 网易音乐",
-    "RULE-SET,Epic,🎮 游戏平台",
-    "RULE-SET,Origin,🎮 游戏平台",
-    "RULE-SET,Sony,🎮 游戏平台",
-    "RULE-SET,Steam,🎮 游戏平台",
-    "RULE-SET,Nintendo,🎮 游戏平台",
-    "RULE-SET,YouTube,📹 油管视频",
-    "RULE-SET,Netflix,🎥 奈飞视频",
-    "RULE-SET,Bahamut,📺 巴哈姆特",
-    "RULE-SET,BilibiliHMT,📺 哔哩哔哩",
-    "RULE-SET,Bilibili,📺 哔哩哔哩",
-    "RULE-SET,ChinaMedia,🌏 国内媒体",
-    "RULE-SET,ProxyMedia,🌍 国外媒体",
-    "RULE-SET,ProxyGFWlist,🚀 节点选择",
-    "RULE-SET,ChinaDomain,🎯 全球直连",
-    "RULE-SET,ChinaCompanyIp,🎯 全球直连",
-    "RULE-SET,Download,🎯 全球直连",
-    "GEOIP,CN,🎯 全球直连",
-    "MATCH,🐟 漏网之鱼"
+    `RULE-SET,Bing,${GROUP.microsoftBing}`,
+    `RULE-SET,OneDrive,${GROUP.microsoftDrive}`,
+    `RULE-SET,Microsoft,${GROUP.microsoft}`,
+    `RULE-SET,Apple,${GROUP.apple}`,
+    `RULE-SET,Telegram,${GROUP.telegram}`,
+    `RULE-SET,GitHub,${GROUP.github}`,
+    `RULE-SET,AI,${GROUP.ai}`,
+    `RULE-SET,OpenAi,${GROUP.ai}`,
+    `RULE-SET,NetEaseMusic,${GROUP.netease}`,
+    `RULE-SET,Epic,${GROUP.games}`,
+    `RULE-SET,Origin,${GROUP.games}`,
+    `RULE-SET,Sony,${GROUP.games}`,
+    `RULE-SET,Steam,${GROUP.games}`,
+    `RULE-SET,Nintendo,${GROUP.games}`,
+    `RULE-SET,YouTube,${GROUP.youtube}`,
+    `RULE-SET,Netflix,${GROUP.netflix}`,
+    `RULE-SET,Bahamut,${GROUP.bahamut}`,
+    `RULE-SET,BilibiliHMT,${GROUP.bilibili}`,
+    `RULE-SET,Bilibili,${GROUP.bilibili}`,
+    `RULE-SET,ChinaMedia,${GROUP.domesticMedia}`,
+    `RULE-SET,ProxyMedia,${GROUP.globalMedia}`,
+    `RULE-SET,ProxyGFWlist,${GROUP.node}`,
+    `RULE-SET,ChinaDomain,${GROUP.direct}`,
+    `RULE-SET,ChinaCompanyIp,${GROUP.direct}`,
+    `RULE-SET,Download,${GROUP.direct}`,
+    `GEOIP,CN,${GROUP.direct}`,
+    `MATCH,${GROUP.fallback}`
   ];
 
   // =========================================================
