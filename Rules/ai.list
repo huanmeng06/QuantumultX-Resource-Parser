@@ -1,5 +1,5 @@
-﻿# Shared remote rule set
-# Source: huanmeng06/Proxy-Config-Sets/Rules
+# Shared remote rule set
+# Sources: huanmeng06/Proxy-Config-Sets rules + ACL4SSR Clash rules
 
 DOMAIN-KEYWORD,anthropic
 DOMAIN-KEYWORD,claude
@@ -53,3 +53,13 @@ DOMAIN-SUFFIX,x.ai
 DOMAIN-SUFFIX,challenges.cloudflare.com
 DOMAIN-SUFFIX,sentry.io
 DOMAIN-SUFFIX,stripe.com
+DOMAIN-KEYWORD,colab
+DOMAIN-KEYWORD,developerprofiles
+DOMAIN-KEYWORD,generativelanguage
+DOMAIN,alkalimakersuite-pa.clients6.google.com
+DOMAIN,makersuite.google.com
+DOMAIN-SUFFIX,deepmind.com
+DOMAIN-SUFFIX,deepmind.google
+DOMAIN-SUFFIX,generativeai.google
+DOMAIN-SUFFIX,proactivebackend-pa.googleapis.com
+DOMAIN-SUFFIX,apis.google.com

@@ -1,5 +1,5 @@
-﻿# Shared remote rule set
-# Source: huanmeng06/Proxy-Config-Sets/Rules
+# Shared remote rule set
+# Sources: huanmeng06/Proxy-Config-Sets rules + ACL4SSR Clash rules
 
 DOMAIN,bahamut.akamaized.net
 DOMAIN,gamer-cds.cdn.hinet.net

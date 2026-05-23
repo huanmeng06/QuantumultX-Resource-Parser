@@ -1,5 +1,5 @@
-﻿# Shared remote rule set
-# Source: huanmeng06/Proxy-Config-Sets/Rules
+# Shared remote rule set
+# Sources: huanmeng06/Proxy-Config-Sets rules + ACL4SSR Clash rules
 
 DOMAIN-SUFFIX,epicgames.com
 DOMAIN-SUFFIX,epicgames.dev
@@ -52,3 +52,51 @@ DOMAIN-SUFFIX,nintendo.jp
 DOMAIN-SUFFIX,nintendo.net
 DOMAIN-SUFFIX,nintendo.nl
 DOMAIN-SUFFIX,nintendowifi.net
+DOMAIN-SUFFIX,battle.net
+DOMAIN-SUFFIX,battlenet.com
+DOMAIN-SUFFIX,blizzard.com
+DOMAIN-SUFFIX,xbox.com
+DOMAIN-SUFFIX,xboxab.com
+DOMAIN-SUFFIX,xboxab.net
+DOMAIN-SUFFIX,xboxlive.com
+DOMAIN-SUFFIX,xboxservice.com
+DOMAIN-SUFFIX,xboxservices.com
+DOMAIN-SUFFIX,gamepass.com
+DOMAIN,ext1-hkg1.steamserver.net
+DOMAIN,ext2-hkg1.steamserver.net
+DOMAIN,ext3-hkg1.steamserver.net
+DOMAIN,ext4-hkg1.steamserver.net
+DOMAIN,ext5-hkg1.steamserver.net
+DOMAIN,ext6-hkg1.steamserver.net
+DOMAIN,ext7-hkg1.steamserver.net
+DOMAIN,ext1-tyo3.steamserver.net
+DOMAIN,ext2-tyo3.steamserver.net
+DOMAIN,ext3-tyo3.steamserver.net
+DOMAIN,ext4-tyo3.steamserver.net
+DOMAIN,ext1-sgp1.steamserver.net
+DOMAIN,ext2-sgp1.steamserver.net
+DOMAIN,ext3-sgp1.steamserver.net
+DOMAIN,ext4-sgp1.steamserver.net
+DOMAIN,ext1-lax1.steamserver.net
+DOMAIN,ext2-lax1.steamserver.net
+DOMAIN,ssl-lvlt.cdn.ea.com
+DOMAIN,uplaypc-s-ubisoft.cdn.ubionline.com.cn
+DOMAIN,gamedownloads-rockstargames-com.akamaized.net
+DOMAIN,gog-cdn-lumen.secure2.footprint.net
+DOMAIN,download.cdp.bethesda.net
+DOMAIN,download.hikarifield.co.jp
+DOMAIN,client.hikarifield.co.jp
+DOMAIN,download.epicgames.com
+DOMAIN,download2.epicgames.com
+DOMAIN,download3.epicgames.com
+DOMAIN,download4.epicgames.com
+DOMAIN,epicgames-download1.akamaized.net
+DOMAIN,packagespc.xboxlive.com
+DOMAIN,xvcf1.xboxlive.com
+DOMAIN,xvcf2.xboxlive.com
+DOMAIN,assets1.xboxlive.com
+DOMAIN,assets2.xboxlive.com
+DOMAIN-SUFFIX,dyn.riotcdn.net
+DOMAIN-SUFFIX,cdn.ubi.com
+DOMAIN-SUFFIX,tap.io
+DOMAIN-SUFFIX,taptap.tw

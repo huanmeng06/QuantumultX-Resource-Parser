@@ -1,5 +1,5 @@
-﻿# Shared remote rule set
-# Source: huanmeng06/Proxy-Config-Sets/Rules
+# Shared remote rule set
+# Sources: huanmeng06/Proxy-Config-Sets rules + ACL4SSR Clash rules
 
 DOMAIN-SUFFIX,1password.com
 DOMAIN-SUFFIX,adguard.org
@@ -6881,3 +6881,53 @@ DOMAIN-SUFFIX,githubcopilot.com
 DOMAIN-SUFFIX,githubmemory.com
 DOMAIN-SUFFIX,githubusercontent.com
 DOMAIN-SUFFIX,githubapp.com
+DOMAIN-SUFFIX,a248.e.akamai.net
+DOMAIN-SUFFIX,adobedtm.com
+DOMAIN-SUFFIX,aolcdn.com
+DOMAIN-SUFFIX,app-measurement.com
+DOMAIN-SUFFIX,armorgames.com
+DOMAIN-SUFFIX,aspnetcdn.com
+DOMAIN-SUFFIX,awsstatic.com
+DOMAIN-SUFFIX,azureedge.net
+DOMAIN-SUFFIX,bkrtx.com
+DOMAIN-SUFFIX,blogcdn.com
+DOMAIN-SUFFIX,blogsmithmedia.com
+DOMAIN-SUFFIX,cdnst.net
+DOMAIN-SUFFIX,comodoca.com
+DOMAIN-SUFFIX,deskconnect.com
+DOMAIN-SUFFIX,disquscdn.com
+DOMAIN-SUFFIX,dropboxstatic.com
+DOMAIN-SUFFIX,edgekey.net
+DOMAIN-SUFFIX,fastmail.com
+DOMAIN-SUFFIX,gfx.ms
+DOMAIN-SUFFIX,id.heroku.com
+DOMAIN-SUFFIX,io.io
+DOMAIN-SUFFIX,kat.cr
+DOMAIN-SUFFIX,licdn.com
+DOMAIN-SUFFIX,live.net
+DOMAIN-SUFFIX,llnwd.net
+DOMAIN-SUFFIX,macrumors.com
+DOMAIN-SUFFIX,megaupload.com
+DOMAIN-SUFFIX,netdna-cdn.com
+DOMAIN-SUFFIX,nintendo.net
+DOMAIN-SUFFIX,nsstatic.net
+DOMAIN-SUFFIX,prfct.co
+DOMAIN-SUFFIX,sfx.ms
+DOMAIN-SUFFIX,slack-edge.com
+DOMAIN-SUFFIX,symauth.com
+DOMAIN-SUFFIX,symcb.com
+DOMAIN-SUFFIX,symcd.com
+DOMAIN-SUFFIX,trustasiassl.com
+DOMAIN-SUFFIX,tumblr.co
+DOMAIN-SUFFIX,txmblr.com
+DOMAIN-SUFFIX,vox-cdn.com
+DOMAIN,d1q6f0aelx0por.cloudfront.net
+DOMAIN,d2wy8f7a9ursnm.cloudfront.net
+DOMAIN,d36jcksde1wxzq.cloudfront.net
+DOMAIN-SUFFIX,compose-spec.io
+DOMAIN-SUFFIX,dockerhub.com
+DOMAIN-SUFFIX,c.gle
+DOMAIN-SUFFIX,challenges.cloudflare.com
+DOMAIN-SUFFIX,microsoftpersonalcontent.com
+DOMAIN-SUFFIX,zoom.us
+DOMAIN-SUFFIX,zoomgov.com

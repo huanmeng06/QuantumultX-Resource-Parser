@@ -1,6 +1,6 @@
 ﻿# Quantumult X
 
-Quantumult X 自用配置，共用远程分流规则位于仓库根目录 `rules/`。
+Quantumult X 自用配置，共用远程分流规则位于仓库根目录 `Rules/`。
 
 ## 文件
 
@@ -9,10 +9,10 @@ Quantumult X 自用配置，共用远程分流规则位于仓库根目录 `rules
 
 ## 规则引用
 
-主配置通过 `[filter_remote]` 引用根目录 `rules` 下的规则文件，例如：
+主配置通过 `[filter_remote]` 引用根目录 `Rules` 下的规则文件，例如：
 
 ```ini
-https://raw.githubusercontent.com/huanmeng06/Proxy-Config-Sets/main/rules/github.list, tag=GitHub, force-policy=🐙 GITHUB, update-interval=172800, opt-parser=true, enabled=true
+https://raw.githubusercontent.com/huanmeng06/Proxy-Config-Sets/refs/heads/main/Rules/github.list, tag=GitHub, force-policy=🐙 GITHUB, update-interval=172800, opt-parser=true, enabled=true
 ```
 
 规则文件只保留规则本体，不带最终策略组；策略由 `force-policy` 指定。

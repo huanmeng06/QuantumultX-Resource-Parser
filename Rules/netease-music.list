@@ -1,5 +1,5 @@
-﻿# Shared remote rule set
-# Source: huanmeng06/Proxy-Config-Sets/Rules
+# Shared remote rule set
+# Sources: huanmeng06/Proxy-Config-Sets rules + ACL4SSR Clash rules
 
 DOMAIN-SUFFIX,163yun.com
 DOMAIN-SUFFIX,api.iplay.163.com

@@ -5,7 +5,7 @@ function main(config) {
   const TEST_URL = "http://www.gstatic.com/generate_204";
   const INTERVAL = 300;
   const TOLERANCE = 50;
-  const RULES_BASE = "https://raw.githubusercontent.com/huanmeng06/Proxy-Config-Sets/main/rules";
+  const RULES_BASE = "https://raw.githubusercontent.com/huanmeng06/Proxy-Config-Sets/refs/heads/main/Rules";
   const GROUP = {
     node: "🚀 节点选择",
     manual: "🚀 手动切换",
@@ -375,45 +375,44 @@ function main(config) {
 
   config["proxy-groups"] = proxyGroups;
 
-  // 规则集：第三方上游 URL 保持不动，自维护规则统一走仓库根目录 rules。
+  // 规则集统一走仓库根目录 Rules，确保 Clash 与 QX/Shadowrocket 使用同一批分流。
   const ruleProviderUrls = {
-    "LocalAreaNetwork": "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/LocalAreaNetwork.list",
-    "UnBan": "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/UnBan.list",
-    "BanAD": "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/BanAD.list",
-    "BanProgramAD": "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/BanProgramAD.list",
-    "GoogleFCM": "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/GoogleFCM.list",
-    "GoogleCN": "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/GoogleCN.list",
-    "SteamCN": "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/SteamCN.list",
-    "Bing": "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Bing.list",
-    "OneDrive": "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/OneDrive.list",
-    "Microsoft": "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Microsoft.list",
-    "Apple": "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Apple.list",
-    "Telegram": "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Telegram.list",
+    "LocalAreaNetwork": `${RULES_BASE}/direct.list`,
+    "UnBan": `${RULES_BASE}/direct.list`,
+    "BanAD": `${RULES_BASE}/ads.list`,
+    "BanProgramAD": `${RULES_BASE}/app-clean.list`,
+    "GoogleFCM": `${RULES_BASE}/google-fcm.list`,
+    "GoogleCN": `${RULES_BASE}/direct.list`,
+    "SteamCN": `${RULES_BASE}/direct.list`,
+    "Bing": `${RULES_BASE}/microsoft-bing.list`,
+    "OneDrive": `${RULES_BASE}/microsoft-drive.list`,
+    "Microsoft": `${RULES_BASE}/microsoft.list`,
+    "Apple": `${RULES_BASE}/apple.list`,
+    "Telegram": `${RULES_BASE}/telegram.list`,
     "GitHub": `${RULES_BASE}/github.list`,
-    "AI": "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/AI.list",
-    "OpenAi": "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/OpenAi.list",
-    "NetEaseMusic": "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/NetEaseMusic.list",
-    "Epic": "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/Epic.list",
-    "Origin": "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/Origin.list",
-    "Sony": "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/Sony.list",
-    "Steam": "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/Steam.list",
-    "Nintendo": "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/Nintendo.list",
-    "YouTube": "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/YouTube.list",
-    "Netflix": "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/Netflix.list",
-    "Bahamut": "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/Bahamut.list",
-    "BilibiliHMT": "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/BilibiliHMT.list",
-    "Bilibili": "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/Bilibili.list",
-    "ChinaMedia": "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ChinaMedia.list",
-    "ProxyMedia": "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ProxyMedia.list",
-    "ProxyGFWlist": "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ProxyGFWlist.list",
-    "ChinaDomain": "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ChinaDomain.list",
-    "ChinaCompanyIp": "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ChinaCompanyIp.list",
-    "Download": "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Download.list"
+    "AI": `${RULES_BASE}/ai.list`,
+    "OpenAi": `${RULES_BASE}/ai.list`,
+    "NetEaseMusic": `${RULES_BASE}/netease-music.list`,
+    "Epic": `${RULES_BASE}/games.list`,
+    "Origin": `${RULES_BASE}/games.list`,
+    "Sony": `${RULES_BASE}/games.list`,
+    "Steam": `${RULES_BASE}/games.list`,
+    "Nintendo": `${RULES_BASE}/games.list`,
+    "YouTube": `${RULES_BASE}/youtube.list`,
+    "Netflix": `${RULES_BASE}/netflix.list`,
+    "Bahamut": `${RULES_BASE}/bahamut.list`,
+    "BilibiliHMT": `${RULES_BASE}/bilibili.list`,
+    "Bilibili": `${RULES_BASE}/bilibili.list`,
+    "ChinaMedia": `${RULES_BASE}/domestic-media.list`,
+    "ProxyMedia": `${RULES_BASE}/global-media.list`,
+    "ProxyGFWlist": `${RULES_BASE}/proxy.list`,
+    "ChinaDomain": `${RULES_BASE}/direct.list`,
+    "ChinaCompanyIp": `${RULES_BASE}/direct.list`,
+    "Download": `${RULES_BASE}/direct.list`
   };
 
   config["rule-providers"] = {};
-  const getRuleProviderPath = (name) =>
-    name === "GitHub" ? "./rulesets/Proxy-Config-Sets/GitHub.list" : `./rulesets/ACL4SSR/${name}.list`;
+  const getRuleProviderPath = (name) => `./rulesets/Proxy-Config-Sets/${name}.list`;
 
   for (const [name, url] of Object.entries(ruleProviderUrls)) {
     config["rule-providers"][name] = {

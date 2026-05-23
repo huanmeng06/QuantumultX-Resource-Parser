@@ -1,5 +1,5 @@
-﻿# Shared remote rule set
-# Source: huanmeng06/Proxy-Config-Sets/Rules
+# Shared remote rule set
+# Sources: huanmeng06/Proxy-Config-Sets rules + ACL4SSR Clash rules
 
 DOMAIN,apiintl.biliapi.net
 DOMAIN,upos-hz-mirrorakam.akamaized.net
@@ -38,3 +38,48 @@ DOMAIN-SUFFIX,v.smtcdns.com
 DOMAIN-SUFFIX,vv.video.qq.com
 DOMAIN-SUFFIX,youku.com
 IP-CIDR,106.11.0.0/16,no-resolve
+DOMAIN-SUFFIX,bilibili.co
+DOMAIN-SUFFIX,biliintl.co
+DOMAIN,p-bstarstatic.akamaized.net
+DOMAIN,p.bstarstatic.com
+DOMAIN,upos-bstar-mirrorakam.akamaized.net
+DOMAIN,upos-bstar1-mirrorakam.akamaized.net
+IP-CIDR,45.43.32.234/32,no-resolve
+IP-CIDR,103.151.150.0/23,no-resolve
+IP-CIDR,119.29.29.29/32,no-resolve
+IP-CIDR,128.1.62.200/32,no-resolve
+IP-CIDR,128.1.62.201/32,no-resolve
+IP-CIDR,150.116.92.250/32,no-resolve
+IP-CIDR,164.52.33.178/32,no-resolve
+IP-CIDR,164.52.33.182/32,no-resolve
+IP-CIDR,164.52.76.18/32,no-resolve
+IP-CIDR,203.107.1.33/32,no-resolve
+IP-CIDR,203.107.1.34/32,no-resolve
+IP-CIDR,203.107.1.65/32,no-resolve
+IP-CIDR,203.107.1.66/32,no-resolve
+DOMAIN-SUFFIX,cctv.com
+DOMAIN-SUFFIX,cctvpic.com
+DOMAIN-SUFFIX,livechina.com
+DOMAIN-SUFFIX,bytefcdnrd.com
+DOMAIN-SUFFIX,douyu.com
+DOMAIN-SUFFIX,douyu.tv
+DOMAIN-SUFFIX,douyucdn.cn
+DOMAIN-SUFFIX,douyuscdn.com
+DOMAIN-SUFFIX,douyutv.com
+DOMAIN-SUFFIX,edgesrv.com
+DOMAIN-SUFFIX,71.am
+DOMAIN-SUFFIX,71edge.com
+DOMAIN-SUFFIX,iqiyi.com
+DOMAIN-SUFFIX,iqiyipic.com
+DOMAIN-SUFFIX,ppsimg.com
+DOMAIN-SUFFIX,qiyi.com
+DOMAIN-SUFFIX,qiyipic.com
+DOMAIN-SUFFIX,qy.net
+DOMAIN,cache.video.iqiyi.com
+DOMAIN-SUFFIX,hitv.com
+DOMAIN-SUFFIX,hunantv.com
+DOMAIN-SUFFIX,mgtv.com
+DOMAIN-SUFFIX,pplive.com
+DOMAIN-SUFFIX,pptv.com
+DOMAIN-SUFFIX,ximalaya.com
+DOMAIN-SUFFIX,xmcdn.com
