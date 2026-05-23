@@ -44,12 +44,11 @@
           "id": "ai",
           "file": "ai.list",
           "policy": {
-            "quantumultX": "💬 Ai平台",
+            "quantumultX": "💬 AI平台",
             "shadowrocket": "💬 AI平台"
           },
           "clashProviders": [
-            "AI",
-            "OpenAi"
+            "AI"
           ]
         },
         {
@@ -159,8 +158,7 @@
             "shadowrocket": "📺 哔哩哔哩"
           },
           "clashProviders": [
-            "BilibiliHMT",
-            "Bilibili"
+            "BilibiliHMT"
           ]
         },
         {
@@ -231,11 +229,7 @@
             "shadowrocket": "🎮 游戏平台"
           },
           "clashProviders": [
-            "Epic",
-            "Origin",
-            "Sony",
-            "Steam",
-            "Nintendo"
+            "Games"
           ]
         }
       ]
@@ -251,13 +245,7 @@
             "shadowrocket": "🎯 全球直连"
           },
           "clashProviders": [
-            "LocalAreaNetwork",
-            "UnBan",
-            "GoogleCN",
-            "SteamCN",
-            "ChinaDomain",
-            "ChinaCompanyIp",
-            "Download"
+            "DirectGroup"
           ]
         },
         {
