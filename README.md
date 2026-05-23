@@ -4,32 +4,6 @@
 
 本仓库的核心目标是：**三端共用同一批远程分流规则，策略组仍按各客户端特性手动维护**。这样日常维护时，大多数改动只需要更新 `Rules/*.list` 或 `manifest/rules.json`，不用在三端配置里重复改同一件事。
 
-## 仓库结构
-
-```text
-Proxy-Config-Sets/
-├─ Rules/
-│  ├─ ads.list
-│  ├─ ai.list
-│  ├─ github.list
-│  └─ ...
-├─ Quantumult X/
-│  ├─ Quantumult X Config v2.conf
-│  ├─ Quantumult X Resource Parser v2.js
-│  └─ README.md
-├─ Shadowrocket/
-│  ├─ Shadowrocket Config v2.conf
-│  └─ README.md
-├─ Clash Verge Rev/
-│  └─ Clash Verge Rev Global Extend Script v2.js
-├─ manifest/
-│  └─ rules.json
-├─ scripts/
-│  └─ generate-rule-refs.js
-├─ README.md
-└─ LICENSE
-```
-
 ## 目录说明
 
 - `Rules/`：三端共用的远程分流规则。规则文件只写规则本体，不写最终策略组。
