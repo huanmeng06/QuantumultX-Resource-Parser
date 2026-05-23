@@ -546,7 +546,7 @@ $parser.uiToHash = function (values) {
     delreg: "[^\\u4e00-\\u9fa5a-zA-Z0-9\\s\\-\\.\\_\\(\\)\\[\\]\\|\\uD83C\\uDDE6-\\uDDFF\\uD83D\\uDC00-\\uDEFF\\u2600-\\u27BF]",
     replace: "%5Cs%7B2%2C%7D@%20",
     emoji: "1",
-    rename: "$tag%20@",
+    rename: "%5B$tag%5D%20@",
     sort: "HK%3EJP%3ESG%3ECN%3EUS"
   };
   var qxPresetKeys = {
